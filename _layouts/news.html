@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="news-article">
+    <div class="container">
+        <header class="article-header">
+            <h1>{{ page.title }}</h1>
+            <div class="article-meta">
+                <time datetime="{{ page.date | date_to_xmlschema }}">
+                    {{ page.date | date: "%d. %B %Y" }}
+                </time>
+            </div>
+        </header>
+        <div class="article-content">
+            {{ content }}
+        </div>
+        <footer class="article-footer">
+            <a href="{{ '/news/' | relative_url }}" class="back-link">← Zurück zur News-Übersicht</a>
+        </footer>
+    </div>
+</article>

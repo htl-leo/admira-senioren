@@ -1,0 +1,85 @@
+---
+layout: default
+title: Willkommen bei den ADmira Senioren
+---
+
+<section class="hero">
+    <div class="container">
+        <h2>Willkommen bei den ADmira Senioren</h2>
+        <p>Die Seniorenabteilung des SK ADmira Linz - Gemeinsam aktiv und verbunden seit 1924</p>
+    </div>
+</section>
+
+<div class="container">
+    <section class="intro-section">
+        <h2>Über uns</h2>
+        <p>
+            Wir sind die Senioren des SK ADmira Linz, eine lebendige Gemeinschaft von Fußballbegeisterten, 
+            die seit vielen Jahren dem Verein die Treue halten. Bei uns stehen Kameradschaft, gemeinsame 
+            Erlebnisse und die Liebe zum Fußball im Mittelpunkt.
+        </p>
+    </section>
+
+    <section class="home-sections mt-3">
+        <div class="items-grid">
+            <div class="item-card">
+                <h3>📅 Nächste Termine</h3>
+                <p>Bleiben Sie auf dem Laufenden über unsere kommenden Veranstaltungen, Treffen und Heimspiele.</p>
+                <a href="{{ '/termine/' | relative_url }}" class="btn mt-2">Zu den Terminen</a>
+            </div>
+
+            <div class="item-card">
+                <h3>📰 Aktuelle News</h3>
+                <p>Alle Neuigkeiten aus der Seniorenabteilung und vom Hauptverein auf einen Blick.</p>
+                <a href="{{ '/news/' | relative_url }}" class="btn mt-2">News lesen</a>
+            </div>
+
+            <div class="item-card">
+                <h3>✈️ Reisen</h3>
+                <p>Entdecken Sie unsere geplanten Vereinsreisen und Ausflüge für die kommende Saison.</p>
+                <a href="{{ '/reisen/' | relative_url }}" class="btn mt-2">Reisen entdecken</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="latest-news mt-3">
+        <h2 class="mb-2">Neueste Meldungen</h2>
+        <div class="items-grid">
+            {% assign latest_news = site.news | sort: 'date' | reverse | limit: 3 %}
+            {% for news in latest_news %}
+            <a href="{{ news.url | relative_url }}" class="item-card">
+                <div class="date">{{ news.date | date: "%d. %B %Y" }}</div>
+                <h3>{{ news.title }}</h3>
+                <p>{{ news.excerpt | strip_html | truncate: 150 }}</p>
+            </a>
+            {% endfor %}
+            
+            {% if site.news.size == 0 %}
+            <p>Derzeit sind noch keine News vorhanden. Schauen Sie bald wieder vorbei!</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="upcoming-termine mt-3">
+        <h2 class="mb-2">Kommende Termine</h2>
+        <div class="items-grid">
+            {% assign upcoming = site.termine | where_exp: "item", "item.datum >= site.time" | sort: 'datum' | limit: 3 %}
+            {% for termin in upcoming %}
+            <a href="{{ termin.url | relative_url }}" class="item-card">
+                <div class="date">{{ termin.datum | date: "%d. %B %Y" }}</div>
+                {% if termin.uhrzeit %}
+                <div class="date">{{ termin.uhrzeit }}</div>
+                {% endif %}
+                <h3>{{ termin.title }}</h3>
+                {% if termin.ort %}
+                <p><strong>Ort:</strong> {{ termin.ort }}</p>
+                {% endif %}
+            </a>
+            {% endfor %}
+            
+            {% if upcoming.size == 0 %}
+            <p>Derzeit sind keine kommenden Termine eingetragen.</p>
+            {% endif %}
+        </div>
+    </section>
+</div>

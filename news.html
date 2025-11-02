@@ -1,0 +1,28 @@
+---
+layout: page
+title: News
+permalink: /news/
+---
+
+<p class="intro">
+    Aktuelle Nachrichten und Berichte aus der Seniorenabteilung des SK ADmira Linz. 
+    Erfahren Sie Neuigkeiten über Veranstaltungen, Mitglieder und besondere Ereignisse.
+</p>
+
+<section class="news-liste mt-3">
+    {% assign all_news = site.news | sort: 'date' | reverse %}
+    
+    {% if all_news.size > 0 %}
+    <div class="items-grid">
+        {% for news in all_news %}
+        <a href="{{ news.url | relative_url }}" class="item-card">
+            <div class="date">{{ news.date | date: "%d. %B %Y" }}</div>
+            <h3>{{ news.title }}</h3>
+            <p>{{ news.excerpt | strip_html | truncate: 180 }}</p>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center">Derzeit sind noch keine News vorhanden. Schauen Sie bald wieder vorbei!</p>
+    {% endif %}
+</section>

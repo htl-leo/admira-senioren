@@ -1,0 +1,59 @@
+# Site settings
+title: ADmira Senioren Linz
+email: senioren@admira.at
+description: >-
+  Webauftritt der Senioren des SK ADmira Linz - 
+  Termine, News und Reisen unserer Senioren-Abteilung
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://htl-leo.github.io" # the base hostname & protocol for your site
+github_username: htl-leo
+repository: htl-leo/admira-senioren
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Collections
+collections:
+  termine:
+    output: true
+    permalink: /termine/:name/
+  news:
+    output: true
+    permalink: /news/:year/:month/:day/:title/
+  reisen:
+    output: true
+    permalink: /reisen/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "termine"
+    values:
+      layout: "termin"
+  - scope:
+      path: ""
+      type: "news"
+    values:
+      layout: "news"
+  - scope:
+      path: ""
+      type: "reisen"
+    values:
+      layout: "reise"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md

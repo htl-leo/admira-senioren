@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<article class="termin-detail">
+    <div class="container">
+        <header class="article-header">
+            <h1>{{ page.title }}</h1>
+            <div class="termin-meta">
+                <div class="termin-datum">
+                    <strong>Datum:</strong> {{ page.datum | date: "%d. %B %Y" }}
+                </div>
+                {% if page.uhrzeit %}
+                <div class="termin-uhrzeit">
+                    <strong>Uhrzeit:</strong> {{ page.uhrzeit }}
+                </div>
+                {% endif %}
+                {% if page.ort %}
+                <div class="termin-ort">
+                    <strong>Ort:</strong> {{ page.ort }}
+                </div>
+                {% endif %}
+            </div>
+        </header>
+        <div class="article-content">
+            {{ content }}
+        </div>
+        <footer class="article-footer">
+            <a href="{{ '/termine/' | relative_url }}" class="back-link">← Zurück zur Terminübersicht</a>
+        </footer>
+    </div>
+</article>

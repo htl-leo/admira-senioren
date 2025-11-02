@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    {% seo %}
+    {% feed_meta %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="{{ '/' | relative_url }}">
+                        <h1>SK ADmira Linz</h1>
+                        <p class="subtitle">Senioren</p>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
+                        <li><a href="{{ '/termine/' | relative_url }}" {% if page.url contains '/termine' %}class="active"{% endif %}>Termine</a></li>
+                        <li><a href="{{ '/news/' | relative_url }}" {% if page.url contains '/news' %}class="active"{% endif %}>News</a></li>
+                        <li><a href="{{ '/reisen/' | relative_url }}" {% if page.url contains '/reisen' %}class="active"{% endif %}>Reisen</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="site-content">
+        {{ content }}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>SK ADMIRA LINZ - SENIOREN</h3>
+                    <p>Bachlbergweg 4<br>4040 Linz</p>
+                    <p>Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="https://www.admira.at/">Hauptverein</a></li>
+                        <li><a href="https://www.admira.at/verein/kontakte/">Kontakt</a></li>
+                        <li><a href="https://www.admira.at/impressum/">Impressum</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ 'now' | date: "%Y" }} SK ADMIRA LINZ - Senioren | Erstellt mit Jekyll</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

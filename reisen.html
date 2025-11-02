@@ -1,0 +1,54 @@
+---
+layout: page
+title: Reisen
+permalink: /reisen/
+---
+
+<p class="intro">
+    Gemeinsam auf Reisen! Entdecken Sie unsere geplanten Vereinsreisen und Ausflüge. 
+    Von Auswärtsfahrten zu Fußballspielen bis zu mehrtägigen Kulturreisen - 
+    erleben Sie unvergessliche Momente mit Ihren ADmira-Freunden.
+</p>
+
+<section class="reisen-liste mt-3">
+    {% assign all_reisen = site.reisen | sort: 'reisedatum' %}
+    {% assign upcoming = all_reisen | where_exp: "item", "item.reisedatum >= site.time" %}
+    {% assign past = all_reisen | where_exp: "item", "item.reisedatum < site.time" | reverse %}
+    
+    {% if upcoming.size > 0 %}
+    <h2>Geplante Reisen</h2>
+    <div class="items-grid mb-3">
+        {% for reise in upcoming %}
+        <a href="{{ reise.url | relative_url }}" class="item-card">
+            {% if reise.reisezeitraum %}
+            <div class="date">{{ reise.reisezeitraum }}</div>
+            {% endif %}
+            <h3>{{ reise.title }}</h3>
+            {% if reise.preis %}
+            <p><strong>Preis:</strong> {{ reise.preis }}</p>
+            {% endif %}
+            {% if reise.anmeldeschluss %}
+            <p><strong>Anmeldung bis:</strong> {{ reise.anmeldeschluss | date: "%d. %B %Y" }}</p>
+            {% endif %}
+            <p>{{ reise.excerpt | strip_html | truncate: 150 }}</p>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center mb-3">Derzeit sind keine Reisen geplant. Wir informieren Sie, sobald neue Reisen angeboten werden!</p>
+    {% endif %}
+    
+    {% if past.size > 0 %}
+    <h2>Vergangene Reisen</h2>
+    <div class="items-grid">
+        {% for reise in past limit: 6 %}
+        <a href="{{ reise.url | relative_url }}" class="item-card">
+            {% if reise.reisezeitraum %}
+            <div class="date">{{ reise.reisezeitraum }}</div>
+            {% endif %}
+            <h3>{{ reise.title }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>

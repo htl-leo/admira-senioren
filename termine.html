@@ -1,0 +1,52 @@
+---
+layout: page
+title: Termine
+permalink: /termine/
+---
+
+<p class="intro">
+    Hier finden Sie alle wichtigen Termine unserer Seniorenabteilung. Von Vereinstreffen über 
+    Heimspielbesuche bis zu geselligen Zusammenkünften - bleiben Sie immer auf dem Laufenden.
+</p>
+
+<section class="termine-liste mt-3">
+    {% assign all_termine = site.termine | sort: 'datum' %}
+    {% assign upcoming = all_termine | where_exp: "item", "item.datum >= site.time" %}
+    {% assign past = all_termine | where_exp: "item", "item.datum < site.time" | reverse %}
+    
+    {% if upcoming.size > 0 %}
+    <h2>Kommende Termine</h2>
+    <div class="items-grid mb-3">
+        {% for termin in upcoming %}
+        <a href="{{ termin.url | relative_url }}" class="item-card">
+            <div class="date">{{ termin.datum | date: "%d. %B %Y" }}</div>
+            {% if termin.uhrzeit %}
+            <div class="date">{{ termin.uhrzeit }} Uhr</div>
+            {% endif %}
+            <h3>{{ termin.title }}</h3>
+            {% if termin.ort %}
+            <p><strong>Ort:</strong> {{ termin.ort }}</p>
+            {% endif %}
+            <p>{{ termin.excerpt | strip_html | truncate: 120 }}</p>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center mb-3">Derzeit sind keine kommenden Termine eingetragen.</p>
+    {% endif %}
+    
+    {% if past.size > 0 %}
+    <h2>Vergangene Termine</h2>
+    <div class="items-grid">
+        {% for termin in past limit: 6 %}
+        <a href="{{ termin.url | relative_url }}" class="item-card">
+            <div class="date">{{ termin.datum | date: "%d. %B %Y" }}</div>
+            <h3>{{ termin.title }}</h3>
+            {% if termin.ort %}
+            <p><strong>Ort:</strong> {{ termin.ort }}</p>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>

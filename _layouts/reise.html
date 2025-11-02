@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<article class="reise-detail">
+    <div class="container">
+        <header class="article-header">
+            <h1>{{ page.title }}</h1>
+            <div class="reise-meta">
+                {% if page.reisezeitraum %}
+                <div class="reise-zeitraum">
+                    <strong>Reisezeitraum:</strong> {{ page.reisezeitraum }}
+                </div>
+                {% endif %}
+                {% if page.preis %}
+                <div class="reise-preis">
+                    <strong>Preis:</strong> {{ page.preis }}
+                </div>
+                {% endif %}
+                {% if page.anmeldeschluss %}
+                <div class="reise-anmeldeschluss">
+                    <strong>Anmeldeschluss:</strong> {{ page.anmeldeschluss | date: "%d. %B %Y" }}
+                </div>
+                {% endif %}
+            </div>
+        </header>
+        <div class="article-content">
+            {{ content }}
+        </div>
+        <footer class="article-footer">
+            <a href="{{ '/reisen/' | relative_url }}" class="back-link">← Zurück zur Reisen-Übersicht</a>
+        </footer>
+    </div>
+</article>
