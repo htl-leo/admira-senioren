@@ -4,14 +4,13 @@ email: senioren@admira.at
 description: >-
   Webauftritt der Senioren des SK ADmira Linz - 
   Termine, News und Reisen unserer Senioren-Abteilung
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/admira-senioren" # the subpath of your site, e.g. /blog
 url: "https://htl-leo.github.io" # the base hostname & protocol for your site
 github_username: htl-leo
 repository: htl-leo/admira-senioren
 
 # Build settings
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
