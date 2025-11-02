@@ -12,8 +12,18 @@ permalink: /reisen/
 
 <section class="reisen-liste mt-3">
     {% assign all_reisen = site.reisen | sort: 'reisedatum' %}
-    {% assign upcoming = all_reisen | where_exp: "item", "item.reisedatum >= site.time" %}
-    {% assign past = all_reisen | where_exp: "item", "item.reisedatum < site.time" | reverse %}
+    {% assign now = 'now' | date: '%s' %}
+    {% assign upcoming = "" | split: "" %}
+    {% assign past = "" | split: "" %}
+    {% for reise in all_reisen %}
+        {% assign reise_timestamp = reise.reisedatum | date: '%s' %}
+        {% if reise_timestamp >= now %}
+            {% assign upcoming = upcoming | push: reise %}
+        {% else %}
+            {% assign past = past | push: reise %}
+        {% endif %}
+    {% endfor %}
+    {% assign past = past | reverse %}
     
     {% if upcoming.size > 0 %}
     <h2>Geplante Reisen</h2>

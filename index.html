@@ -63,7 +63,15 @@ title: Willkommen bei den ADmira Senioren
     <section class="upcoming-termine mt-3">
         <h2 class="mb-2">Kommende Termine</h2>
         <div class="items-grid">
-            {% assign upcoming = site.termine | where_exp: "item", "item.datum >= site.time" | sort: 'datum' | limit: 3 %}
+            {% assign now = 'now' | date: '%s' %}
+            {% assign upcoming_termine = "" | split: "" %}
+            {% for termin in site.termine %}
+                {% assign termin_timestamp = termin.datum | date: '%s' %}
+                {% if termin_timestamp >= now %}
+                    {% assign upcoming_termine = upcoming_termine | push: termin %}
+                {% endif %}
+            {% endfor %}
+            {% assign upcoming = upcoming_termine | sort: 'datum' | slice: 0, 3 %}
             {% for termin in upcoming %}
             <a href="{{ termin.url | relative_url }}" class="item-card">
                 <div class="date">{{ termin.datum | date: "%d. %B %Y" }}</div>

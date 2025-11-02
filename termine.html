@@ -11,8 +11,18 @@ permalink: /termine/
 
 <section class="termine-liste mt-3">
     {% assign all_termine = site.termine | sort: 'datum' %}
-    {% assign upcoming = all_termine | where_exp: "item", "item.datum >= site.time" %}
-    {% assign past = all_termine | where_exp: "item", "item.datum < site.time" | reverse %}
+    {% assign now = 'now' | date: '%s' %}
+    {% assign upcoming = "" | split: "" %}
+    {% assign past = "" | split: "" %}
+    {% for termin in all_termine %}
+        {% assign termin_timestamp = termin.datum | date: '%s' %}
+        {% if termin_timestamp >= now %}
+            {% assign upcoming = upcoming | push: termin %}
+        {% else %}
+            {% assign past = past | push: termin %}
+        {% endif %}
+    {% endfor %}
+    {% assign past = past | reverse %}
     
     {% if upcoming.size > 0 %}
     <h2>Kommende Termine</h2>
